@@ -4,6 +4,9 @@ test.describe('My Tray Navigation', () => {
   test.beforeEach(async ({ page }) => {
     // Login before each test
     await page.goto('https://aiv3portal.ibbtrade.com/');
+    await page.waitForURL('**/login');
+    await expect(page).toHaveURL(/login/);
+    await expect(page).toHaveTitle('AutoInspekt (Ver 2.0) - Login');
     await page.getByRole('textbox', { name: 'Username / Email Address /' }).fill('23294629');
     await page.getByRole('textbox', { name: 'Password' }).fill('Test@123');
     await page.getByRole('button', { name: 'Log In' }).click();
