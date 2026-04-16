@@ -33,7 +33,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     /* Navigation timeout — extra headroom for slow CI connections */
     navigationTimeout: process.env.CI ? 60000 : 30000,
-    actionTimeout: process.env.CI ? 30000 : 15000,
+    actionTimeout: process.env.CI ? 60000 : 15000,
   },
 
   /* Configure projects for major browsers */
