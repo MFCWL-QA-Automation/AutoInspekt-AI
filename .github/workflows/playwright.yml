@@ -19,6 +19,11 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+        TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+        TEST_PASSWORD: ${{ secrets.TEST_PASSWORD || '' }}
+        NODE_ENV: staging
     - name: Generate Allure Report
       if: ${{ !cancelled() }}
       run: ./node_modules/.bin/allure generate allure-results -o allure-report
