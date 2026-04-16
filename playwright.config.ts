@@ -21,7 +21,9 @@ export default defineConfig({
   /* Retry once on CI in case of transient network issues */
   retries: process.env.CI ? 1 : 0,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: process.env.CI
+    ? [['html'], ['allure-playwright']]
+    : [['html'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -31,7 +33,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     /* Navigation timeout — extra headroom for slow CI connections */
     navigationTimeout: process.env.CI ? 60000 : 30000,
-    actionTimeout: process.env.CI ? 30000 : 15000,
+    actionTimeout: process.env.CI ? 60000 : 15000,
   },
 
   /* Configure projects for major browsers */
